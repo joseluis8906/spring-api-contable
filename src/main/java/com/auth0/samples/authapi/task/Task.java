@@ -7,26 +7,27 @@ import javax.persistence.Id;
 
 @Entity
 public class Task {
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id;
-	private String description;
+	
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
+    private String description;
 
-	protected Task() { }
+    protected Task() { }
 
-	public Task(String description) {
-		this.description = description;
-	}
+    public Task(String description) {
+            this.description = description;
+    }
 
-	public long getId() {
-		return id;
-	}
+    public long getId() {
+            return id;
+    }
 
-	public String getDescription() {
-		return description;
-	}
+    public String getDescription() {
+            return description;
+    }
 
-	public void setDescription(String description) {
-		this.description = description;
-	}
+    public void setDescription(String description) {
+            this.description = description;
+    }
 }
