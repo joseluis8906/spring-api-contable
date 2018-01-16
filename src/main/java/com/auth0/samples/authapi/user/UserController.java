@@ -10,6 +10,8 @@ package com.auth0.samples.authapi.user;
  * @author jose
  */
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,14 +21,13 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/users")
 public class UserController {
     
-    private ApplicationUserRepository applicationUserRepository;
+    private ApplicationUserRepository applicationUserRepository;    
     private BCryptPasswordEncoder bCryptPasswordEncoder;
     
     public UserController (ApplicationUserRepository applicationUserRepository,
                            BCryptPasswordEncoder bCryptPasswordEncoder) {
         
         this.applicationUserRepository = applicationUserRepository;
-        
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
     }
     
@@ -36,5 +37,11 @@ public class UserController {
         
         applicationUserRepository.save(user);
     }
+    
+    @GetMapping("/{username}")
+    public ApplicationUser getApplicationUser (@PathVariable String username) {
+        return applicationUserRepository.findByUsername(username);
+    }
+    
     
 }

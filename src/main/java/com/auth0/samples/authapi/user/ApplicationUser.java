@@ -23,7 +23,7 @@ public class ApplicationUser {
     
     private String username;
     
-    private String password;
+    private String password;    
     
     public long getId () {
         return id;
