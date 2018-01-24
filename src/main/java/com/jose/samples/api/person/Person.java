@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.auth0.samples.authapi.Tercero;
+package com.jose.samples.api.person;
 
-import com.auth0.samples.authapi.user.ApplicationUser;
+import com.jose.samples.api.user.ApplicationUser;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -17,7 +17,7 @@ import javax.persistence.OneToOne;
  * @author jose
  */
 @Entity
-public class Tercero {
+public class Person {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
@@ -33,9 +33,9 @@ public class Tercero {
     @OneToOne
     private ApplicationUser user;
     
-    protected Tercero () {}
+    protected Person() {}
     
-    public Tercero(String name, String lastname, short age, String phone_number) {
+    public Person(String name, String lastname, short age, String phone_number) {
         this.name = name;
         this.lastname = lastname;
         this.age = age;

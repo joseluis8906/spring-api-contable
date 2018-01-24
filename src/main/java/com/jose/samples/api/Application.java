@@ -1,4 +1,4 @@
-package com.auth0.samples.authapi;
+package com.jose.samples.api;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

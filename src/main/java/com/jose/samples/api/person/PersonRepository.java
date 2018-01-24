@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.auth0.samples.authapi.Tercero;
+package com.jose.samples.api.person;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
@@ -11,6 +11,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
  *
  * @author jose
  */
-public interface TerceroRepository extends JpaRepository<Tercero, Long>{
+public interface PersonRepository extends JpaRepository<Person, Long>{
     
 }

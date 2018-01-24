@@ -3,14 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.auth0.samples.authapi.security;
+package com.jose.samples.api.security;
 
 /**
  *
  * @author jose
  */
 
-import static com.auth0.samples.authapi.security.SecurityConstants.SIGN_UP_URL;
+import static com.jose.samples.api.security.SecurityConstants.SIGN_UP_URL;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;

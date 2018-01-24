@@ -3,21 +3,21 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.auth0.samples.authapi.Tercero;
+package com.jose.samples.api.userperson;
 
 /**
  *
  * @author jose
  */
-public class UserTercero {
+public class UserPerson {
     private Long userId;
-    private Long terceroId;
+    private Long personId;
     
-    protected UserTercero () {}
+    protected UserPerson() {}
     
-    public UserTercero (Long userId, Long terceroId) {
+    public UserPerson(Long userId, Long personId) {
         this.userId = userId;
-        this.terceroId = terceroId;
+        this.personId = personId;
     }
     
     public void setUserId (Long userId) {
@@ -28,11 +28,11 @@ public class UserTercero {
         return userId;
     }
     
-    public void setTerceroId (Long terceroId) {
-        this.terceroId = terceroId;
+    public void setTerceroId (Long personId) {
+        this.personId = personId;
     }
     
     public Long getTerceroId () {
-        return terceroId;
+        return personId;
     }
 }

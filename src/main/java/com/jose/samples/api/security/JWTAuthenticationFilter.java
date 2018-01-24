@@ -3,13 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.auth0.samples.authapi.security;
+package com.jose.samples.api.security;
 
 /**
  *
  * @author jose
  */
-import com.auth0.samples.authapi.user.ApplicationUser;
+import com.jose.samples.api.user.ApplicationUser;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -27,10 +27,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 
-import static com.auth0.samples.authapi.security.SecurityConstants.EXPIRATION_TIME;
-import static com.auth0.samples.authapi.security.SecurityConstants.HEADER_STRING;
-import static com.auth0.samples.authapi.security.SecurityConstants.SECRET;
-import static com.auth0.samples.authapi.security.SecurityConstants.TOKEN_PREFIX;
+import static com.jose.samples.api.security.SecurityConstants.EXPIRATION_TIME;
+import static com.jose.samples.api.security.SecurityConstants.HEADER_STRING;
+import static com.jose.samples.api.security.SecurityConstants.SECRET;
+import static com.jose.samples.api.security.SecurityConstants.TOKEN_PREFIX;
 import io.jsonwebtoken.Jwts;
 
 public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilter{
