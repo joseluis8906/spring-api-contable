@@ -1,2 +1,2 @@
-# spring-boot-rest-jwt-1
-Api rest con jwt integrado
+spring api for contable appoptional = false
+
