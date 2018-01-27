@@ -1,6 +1,6 @@
 package com.jose.samples.api.contable.puc;
 
-abstract class PucModel {
+public abstract class PucModel {
 	private String Codigo;
 	private String Nombre;
 
