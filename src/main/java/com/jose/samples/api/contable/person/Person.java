@@ -20,7 +20,7 @@ import javax.persistence.OneToOne;
 public class Person {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
     
     private String name;
     

@@ -1,14 +1,14 @@
 package com.jose.samples.api.contable.userperson;
 
 public class UserPerson {
-	private long UserId;
-	private long TerceroId;
+	private Long UserId;
+	private Long TerceroId;
 
-	public long getUserId () {
+	public Long getUserId () {
 		return UserId;
 	}
 
-	public long getTerceroId () {
+	public Long getTerceroId () {
 		return TerceroId;
 	}
 }

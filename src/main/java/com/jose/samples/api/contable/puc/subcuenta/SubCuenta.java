@@ -11,7 +11,9 @@ import java.util.List;
 public class SubCuenta extends PucModel {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id;
+	private Long id;
+	private String codigo;
+	private String nombre;
 
 	@ManyToOne(targetEntity = Cuenta.class, cascade = CascadeType.ALL)
 	private Cuenta cuenta;
@@ -22,9 +24,17 @@ public class SubCuenta extends PucModel {
 	public SubCuenta () {}
 
 	public SubCuenta (String codigo, String nombre) {
-		this.setCodigo(codigo);
-		this.setNombre(nombre);
+		this.codigo = codigo;
+		this.nombre = nombre;
 	}
+
+	public void setCodigo (String codigo) {this.codigo = codigo; }
+
+	public void setNombre (String nombre) { this.nombre = nombre; }
+
+	public String getCodigo () { return codigo; }
+
+	public String getNombre () { return nombre; }
 
 	public void setCuenta (Cuenta cuenta) {
 		this.cuenta = cuenta;

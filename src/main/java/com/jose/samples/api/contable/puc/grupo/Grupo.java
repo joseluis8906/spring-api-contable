@@ -11,7 +11,9 @@ import java.util.List;
 public class Grupo extends PucModel {
 	@Id
 	@GeneratedValue (strategy = GenerationType.IDENTITY)
-	private long id;
+	private Long id;
+	private String codigo;
+	private String nombre;
 
 	@ManyToOne(targetEntity = Clase.class, cascade = CascadeType.ALL)
 	private Clase clase;
@@ -22,9 +24,17 @@ public class Grupo extends PucModel {
 	public Grupo () {}
 
 	public Grupo (String codigo, String nombre) {
-		this.setCodigo(codigo);
-		this.setNombre(nombre);
+		this.codigo = codigo;
+		this.nombre = nombre;
 	}
+
+	public void setCodigo (String codigo) {this.codigo = codigo; }
+
+	public void setNombre (String nombre) { this.nombre = nombre; }
+
+	public String getCodigo () { return codigo; }
+
+	public String getNombre () { return nombre; }
 
 	public void setClase (Clase clase) {
 		this.clase = clase;

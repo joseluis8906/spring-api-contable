@@ -1,14 +1,18 @@
 package com.jose.samples.api.contable.puc;
 
 public abstract class PucModel {
-	private String Codigo;
-	private String Nombre;
+	private String codigo;
+	private String nombre;
 
 	public void setCodigo (String Codigo) {
-		this.Codigo = Codigo;
+		this.codigo = Codigo;
 	}
 
 	public void setNombre (String Nombre) {
-		this.Nombre = Nombre;
+		this.nombre = Nombre;
 	}
+
+	public String getCodigo () { return codigo; }
+
+	public String getNombre () { return nombre; }
 }

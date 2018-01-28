@@ -9,7 +9,9 @@ import javax.persistence.*;
 public class Auxiliar extends PucModel {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id;
+	private Long id;
+	private String codigo;
+	private String nombre;
 
 	@ManyToOne(targetEntity = SubCuenta.class, cascade = CascadeType.ALL)
 	private SubCuenta subcuenta;
@@ -17,9 +19,17 @@ public class Auxiliar extends PucModel {
 	public Auxiliar () {}
 
 	public Auxiliar (String codigo, String nombre) {
-		this.setCodigo(codigo);
-		this.setNombre(nombre);
+		this.codigo = codigo;
+		this.nombre = nombre;
 	}
+
+	public void setCodigo (String codigo) {this.codigo = codigo; }
+
+	public void setNombre (String nombre) { this.nombre = nombre; }
+
+	public String getCodigo () { return codigo; }
+
+	public String getNombre () { return nombre; }
 
 	public void setSubcuenta (SubCuenta subcuenta) {
 		this.subcuenta = subcuenta;

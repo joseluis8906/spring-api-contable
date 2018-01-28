@@ -7,12 +7,13 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-public class Clase extends PucModel {
+public class Clase {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id;
-
+	private Long id;
 	private String tipo;
+	private String codigo;
+	private String nombre;
 
 	@OneToMany(targetEntity = Grupo.class)
 	private List<Grupo> grupos;
@@ -20,14 +21,24 @@ public class Clase extends PucModel {
 	public Clase () {}
 
 	public Clase (String tipo, String codigo, String nombre) {
-		this.setTipo(tipo);
-		this.setCodigo(codigo);
-		this.setNombre(nombre);
+		this.tipo = tipo;
+		this.codigo = codigo;
+		this.nombre = nombre;
 	}
 
 	public void setTipo (String tipo) {
 		this.tipo = tipo;
 	}
+
+	public void setCodigo (String codigo) {this.codigo = codigo; }
+
+	public void setNombre (String nombre) { this.nombre = nombre; }
+
+	public String getTipo () { return tipo;	}
+
+	public String getCodigo () { return codigo; }
+
+	public String getNombre () { return nombre; }
 
 	public List<Grupo> getGrupos () {
 		return grupos;
