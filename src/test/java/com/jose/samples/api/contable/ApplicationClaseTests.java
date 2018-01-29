@@ -21,18 +21,22 @@ public class ApplicationClaseTests {
 		System.out.println("Created Clase: \n" + clase);
 
 		List<Clase> clases =  applicationTests.listAll();
-		System.out.println("List all Clases: ");
+		System.out.println("List all clases: ");
 		clases.forEach(clase_ -> System.out.println(clase_.toString()));
 
-		/*
 		clase.setCodigo("2");
 		clase.setNombre("Pasivo");
 		clase.setTipo("Supersolidaria");
-		applicationTests.update(4L, clase);
+		applicationTests.update(clase);
 
 		clases =  applicationTests.listAll();
+		System.out.println("List all clases after update: ");
 		clases.forEach(clase_ -> System.out.println(clase_.toString()));
-		*/
+
+		applicationTests.delete(clase.getId());
+		clases =  applicationTests.listAll();
+		System.out.println("List all clases after delete: ");
+		clases.forEach(clase_ -> System.out.println(clase_.toString()));
 	}
 
 	public Clase add (Clase clase) {
@@ -53,17 +57,17 @@ public class ApplicationClaseTests {
 		return Arrays.asList(clases);
 	}
 
-	public void update (Long id, Clase clase) {
+	public void update (Clase clase) {
 		HttpHeaders httpHeaders = new HttpHeaders();
 		httpHeaders.setContentType(MediaType.APPLICATION_JSON);
 
 		HttpEntity<Clase> entityClase = new HttpEntity<>(clase, httpHeaders);
 
-		restTemplate.put(URI_CLASE + "/{id}", entityClase, id);
+		restTemplate.put(URI_CLASE + "/{id}", entityClase, clase.getId());
 	}
 
 	public void delete (long id) {
-		restTemplate.delete(URI_CLASE + "{id}", id);
+		restTemplate.delete(URI_CLASE + "/{id}", id);
 	}
 
 }

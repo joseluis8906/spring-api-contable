@@ -46,4 +46,9 @@ public class ClaseController {
 		existingClase.setNombre(clase.getNombre());
 		claseServiceImpl.update(existingClase);
 	}
+
+	@DeleteMapping("/{id}")
+	public void delete (@PathVariable long id) {
+		claseServiceImpl.delete(id);
+	}
 }
