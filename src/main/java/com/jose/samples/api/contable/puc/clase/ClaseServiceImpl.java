@@ -28,8 +28,9 @@ public class ClaseServiceImpl implements ClaseService {
 		return this.claseRepository.findAll();
 	}
 
-	public void add (Clase clase) {
+	public Clase add (Clase clase) {
 		this.claseRepository.save(clase);
+		return clase;
 	}
 
 	public void update (Clase clase) {

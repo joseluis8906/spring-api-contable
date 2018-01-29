@@ -26,6 +26,8 @@ public class Clase {
 		this.nombre = nombre;
 	}
 
+	public void setId (Long id) { this.id = id; }
+
 	public void setTipo (String tipo) {
 		this.tipo = tipo;
 	}
@@ -33,6 +35,8 @@ public class Clase {
 	public void setCodigo (String codigo) {this.codigo = codigo; }
 
 	public void setNombre (String nombre) { this.nombre = nombre; }
+
+	public Long getId () { return id; }
 
 	public String getTipo () { return tipo;	}
 

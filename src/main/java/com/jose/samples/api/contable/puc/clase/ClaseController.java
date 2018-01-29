@@ -33,8 +33,8 @@ public class ClaseController {
 	}
 
 	@PostMapping
-	public void add (@RequestBody Clase clase) {
-		claseServiceImpl.add (clase);
+	public Clase add (@RequestBody Clase clase) {
+		return claseServiceImpl.add (clase);
 	}
 
 	@PutMapping("/{id}")

@@ -1,5 +1,7 @@
 package com.jose.samples.api.contable.puc;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class Clase {
 	private Long id;
 	private String tipo;

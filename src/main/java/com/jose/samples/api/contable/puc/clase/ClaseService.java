@@ -6,7 +6,7 @@ public interface ClaseService {
 	public Clase findOne (long id);
 	public List<Clase> findByCodigoOrNombre (String codigo, String nombre);
 	public List<Clase> findAll();
-	public void add (Clase clase);
+	public Clase add (Clase clase);
 	public void update (Clase clase);
 	public void delete (long id);
 }
