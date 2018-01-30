@@ -16,8 +16,8 @@ public class GrupoServiceImpl implements GrupoService {
 	}
 
 	@Override
-	public Grupo findOne (long id) {
-		return this.grupoRepository.findOne(id);
+	public Grupo findById (Long id) {
+		return this.grupoRepository.findById(id);
 	}
 
 	@Override
@@ -47,7 +47,7 @@ public class GrupoServiceImpl implements GrupoService {
 	}
 
 	@Override
-	public void delete (long id) {
+	public void delete (Long id) {
 		this.grupoRepository.delete(id);
 	}
 }

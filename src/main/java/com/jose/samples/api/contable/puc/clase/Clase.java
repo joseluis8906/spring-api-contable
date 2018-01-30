@@ -15,7 +15,7 @@ public class Clase {
 	private String codigo;
 	private String nombre;
 
-	@OneToMany(targetEntity = Grupo.class)
+	@OneToMany(targetEntity = Grupo.class, fetch = FetchType.LAZY)
 	private List<Grupo> grupos;
 
 	public Clase () {}

@@ -1,5 +1,6 @@
 package com.jose.samples.api.contable.puc.clase;
 
+import com.jose.samples.api.contable.puc.grupo.GrupoServiceImpl;
 import io.jsonwebtoken.lang.Assert;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
@@ -18,8 +19,8 @@ public class ClaseController {
 	}
 
 	@GetMapping("/{id}")
-	public Clase findOne (@PathVariable Long id) {
-		return claseServiceImpl.findOne(id);
+	public Clase findById (@PathVariable Long id) {
+		return claseServiceImpl.findById(id);
 	}
 
 	@GetMapping
@@ -38,7 +39,7 @@ public class ClaseController {
 
 	@PutMapping("/{id}")
 	public void update (@PathVariable Long id, @RequestBody Clase clase) {
-		Clase existingClase = claseServiceImpl.findOne(id);
+		Clase existingClase = claseServiceImpl.findById(id);
 		Assert.notNull(existingClase, "Clase no encontrada");
 		existingClase.setTipo(clase.getTipo());
 		existingClase.setCodigo(clase.getCodigo());

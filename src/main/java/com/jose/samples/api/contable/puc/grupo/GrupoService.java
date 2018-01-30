@@ -6,11 +6,11 @@ import com.jose.samples.api.contable.puc.grupo.Grupo;
 import java.util.List;
 
 public interface GrupoService {
-	public Grupo findOne(long id);
+	public Grupo findById(Long id);
 	public List<Grupo> findByCodigoOrNombre(String codigo, String nombre);
 	public List<Grupo> findByClase(Long clase);
 	public List<Grupo> findAll();
 	public Grupo add(Grupo grupo);
 	public void update(Grupo grupo);
-	public void delete(long id);
+	public void delete(Long id);
 }

@@ -17,7 +17,7 @@ public class GrupoController {
 
 	@GetMapping("/{id}")
 	public Grupo findOne (@PathVariable Long id) {
-		return grupoServiceImpl.findOne(id);
+		return grupoServiceImpl.findById(id);
 	}
 
 	@GetMapping("/{codigo}/{nombre}")
@@ -37,7 +37,7 @@ public class GrupoController {
 
 	@PutMapping("/{id}")
 	public void update (@PathVariable Long id, @RequestBody Grupo grupo) {
-		Grupo existingGrupo = grupoServiceImpl.findOne(id);
+		Grupo existingGrupo = grupoServiceImpl.findById(id);
 		Assert.notNull(existingGrupo, "Grupo no encontrada");
 		existingGrupo.setClase(grupo.getClase());
 		existingGrupo.setCodigo(grupo.getCodigo());
