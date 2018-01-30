@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/puc/clases")
+@RequestMapping("/v1/puc/clases")
 public class ClaseController {
 
 	private ClaseServiceImpl claseServiceImpl;
@@ -22,14 +22,13 @@ public class ClaseController {
 		return claseServiceImpl.findOne(id);
 	}
 
-	@GetMapping("/{codigo}/{nombre}")
-	public List<Clase> findByCodigoOrNombre (@PathVariable String codigo, @PathVariable String nombre) {
-		return claseServiceImpl.findByCodigoOrNombre(codigo, nombre);
-	}
-
 	@GetMapping
-	public List<Clase> listAll () {
-		return claseServiceImpl.findAll();
+	public List<Clase> find (@RequestParam(defaultValue = "") String codigo, @RequestParam(defaultValue = "") String nombre) {
+		if(!codigo.isEmpty() || !nombre.isEmpty()) {
+			return claseServiceImpl.findByCodigoOrNombre(codigo, nombre);
+		}else {
+			return claseServiceImpl.findAll();
+		}
 	}
 
 	@PostMapping

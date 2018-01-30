@@ -36,6 +36,10 @@ public class Clase {
 
 	public void setNombre (String nombre) { this.nombre = nombre; }
 
+	public void setGrupos (List<Grupo> grupos) {
+		this.grupos = grupos;
+	}
+
 	public Long getId () { return id; }
 
 	public String getTipo () { return tipo;	}

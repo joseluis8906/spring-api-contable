@@ -6,4 +6,5 @@ import java.util.List;
 
 public interface ClaseRepository extends JpaRepository<Clase, Long> {
 	public List<Clase> findByCodigoContainingOrNombreContaining (String codigo, String nombre);
+	public Clase findById(Long id);
 }

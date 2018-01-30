@@ -1,12 +1,11 @@
 package com.jose.samples.api.contable.puc;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 public class Clase {
 	private Long id;
 	private String tipo;
 	private String codigo;
 	private String nombre;
+	private Grupo[] grupos;
 
 	public Clase () {}
 
@@ -33,6 +32,8 @@ public class Clase {
 		this.nombre = nombre;
 	}
 
+	public void setGrupos (Grupo[] grupos) { this.grupos = grupos; }
+
 	public Long getId () {
 		return id;
 	}
@@ -49,11 +50,25 @@ public class Clase {
 		return nombre;
 	}
 
+	public Grupo[] getGrupos () { return grupos; }
+
 	@Override
 	public String toString() {
 		return "{ \"id\": " + id + ", " +
 				"\"tipo\": \"" + tipo + "\", " +
 				"\"codigo\": \"" + codigo + "\", " +
-				"\"nombre\": \"" + nombre + "\"}";
+				"\"nombre\": \"" + nombre + "\", " +
+				"\"grupos\": [" + gruposToString() + "]}";
+	}
+
+	private String gruposToString () {
+		String grupoString = new String("");
+		if(grupos != null){
+			for (int i=0; i<grupos.length; i++) {
+				grupoString += grupos[i].toString();
+			}
+		}
+
+		return grupoString;
 	}
 }

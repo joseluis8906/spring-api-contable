@@ -34,15 +34,15 @@ public class Grupo extends PucModel {
 
 	public void setNombre (String nombre) { this.nombre = nombre; }
 
+	public void setClase (Clase clase) {
+		this.clase = clase;
+	}
+
 	public Long getId () { return id; }
 
 	public String getCodigo () { return codigo; }
 
 	public String getNombre () { return nombre; }
-
-	public void setClase (Clase clase) {
-		this.clase = clase;
-	}
 
 	public Clase getClase () {
 		return clase;

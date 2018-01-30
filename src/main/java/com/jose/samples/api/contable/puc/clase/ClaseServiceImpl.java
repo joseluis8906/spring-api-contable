@@ -16,8 +16,8 @@ public class ClaseServiceImpl implements ClaseService {
 		this.claseRepository = claseRepository;
 	}
 
-	public Clase findOne (long id) {
-		return this.claseRepository.findOne(id);
+	public Clase findOne (Long id) {
+		return this.claseRepository.findById(id);
 	}
 
 	public List<Clase> findByCodigoOrNombre (String codigo, String nombre) {
