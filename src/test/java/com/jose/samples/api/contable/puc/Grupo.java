@@ -1,12 +1,13 @@
 package com.jose.samples.api.contable.puc;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Grupo {
 	private Long id;
 	private String codigo;
 	private String nombre;
-	private Clase clase;
+	private List<Cuenta> cuentas = new ArrayList<>();
 
 	public Grupo() {}
 
@@ -28,6 +29,8 @@ public class Grupo {
 		this.nombre = nombre;
 	}
 
+	public void setCuentas (List<Cuenta> cuentas) { this.cuentas = cuentas; }
+
 	public Long getId () {
 		return id;
 	}
@@ -40,13 +43,29 @@ public class Grupo {
 		return nombre;
 	}
 
-	public Clase getClase () { return clase; }
+	public List<Cuenta> getCuentas () { return cuentas; }
 
 	@Override
 	public String toString() {
 		return "{ \"id\": " + id + ", " +
 				"\"codigo\": \"" + codigo + "\", " +
-				"\"nombre\": \"" + nombre + "\", " +
-				"\"clase\": " + clase.toString() + "}";
+				"\"nombre\": \"" + nombre + "\" " +
+				"\"cuentas\": [" + cuentasToString() + "]}";
 	}
+
+	private String cuentasToString () {
+		String cuentasString = new String("");
+		if(cuentas != null){
+			for (Cuenta c : cuentas) {
+				cuentasString += c.toString();
+			}
+		}
+
+		return cuentasString;
+	}
+
+	public void addCuenta (Cuenta cuenta) {
+		getCuentas().add(cuenta);
+	}
+
 }

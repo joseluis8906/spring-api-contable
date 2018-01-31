@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/puc/grupos")
+@RequestMapping("/v1/puc/grupos")
 public class GrupoController {
 
 	private GrupoServiceImpl grupoServiceImpl;
@@ -30,16 +30,10 @@ public class GrupoController {
 		return grupoServiceImpl.findAll();
 	}
 
-	@PostMapping
-	public Grupo add (@RequestBody Grupo grupo) {
-		return grupoServiceImpl.add (grupo);
-	}
-
 	@PutMapping("/{id}")
 	public void update (@PathVariable Long id, @RequestBody Grupo grupo) {
 		Grupo existingGrupo = grupoServiceImpl.findById(id);
-		Assert.notNull(existingGrupo, "Grupo no encontrada");
-		//existingGrupo.setClase(grupo.getClase());
+		Assert.notNull(existingGrupo, "Grupo no encontrado");
 		existingGrupo.setCodigo(grupo.getCodigo());
 		existingGrupo.setNombre(grupo.getNombre());
 		grupoServiceImpl.update(existingGrupo);

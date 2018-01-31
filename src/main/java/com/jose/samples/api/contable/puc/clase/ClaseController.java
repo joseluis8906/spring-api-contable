@@ -1,9 +1,7 @@
 package com.jose.samples.api.contable.puc.clase;
 
-import com.jose.samples.api.contable.puc.grupo.GrupoServiceImpl;
+import com.jose.samples.api.contable.puc.grupo.Grupo;
 import io.jsonwebtoken.lang.Assert;
-import org.springframework.http.HttpStatus;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -48,7 +46,15 @@ public class ClaseController {
 	}
 
 	@DeleteMapping("/{id}")
-	public void delete (@PathVariable long id) {
+	public void delete (@PathVariable Long id) {
 		claseServiceImpl.delete(id);
+	}
+
+	@PostMapping("/{id}/grupos")
+	public void addGrupo (@PathVariable Long id, @RequestParam Grupo grupo) {
+		Clase existingClase = claseServiceImpl.findById(id);
+		Assert.notNull(existingClase, "Clase no encontrada");
+		existingClase.getGrupos().add(grupo);
+		claseServiceImpl.update(existingClase);
 	}
 }

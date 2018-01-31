@@ -25,25 +25,20 @@ public class GrupoServiceImpl implements GrupoService {
 		return this.grupoRepository.findByCodigoContainingOrNombreContaining (codigo, nombre);
 	}
 
-	//@Override
-	/*public List<Grupo> findByClase(Long clase) {
-		return this.grupoRepository.findByClase(clase);
-	}*/
-
 	@Override
 	public List<Grupo> findAll() {
 		return this.grupoRepository.findAll();
 	}
 
 	@Override
-	public Grupo add (Grupo clase) {
-		this.grupoRepository.save(clase);
-		return clase;
+	public Grupo add (Grupo grupo) {
+		this.grupoRepository.save(grupo);
+		return grupo;
 	}
 
 	@Override
-	public void update (Grupo clase) {
-		this.grupoRepository.save(clase);
+	public void update (Grupo grupo) {
+		this.grupoRepository.save(grupo);
 	}
 
 	@Override

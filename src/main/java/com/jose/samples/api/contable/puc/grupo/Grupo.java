@@ -1,8 +1,9 @@
 package com.jose.samples.api.contable.puc.grupo;
 
-import com.jose.samples.api.contable.puc.clase.Clase;
+import com.jose.samples.api.contable.puc.cuenta.Cuenta;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Grupo {
@@ -11,6 +12,9 @@ public class Grupo {
 	private Long id;
 	private String codigo;
 	private String nombre;
+	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+	@JoinColumn(name = "grupo_id")
+	private List<Cuenta> cuentas;
 
 	public Grupo () {}
 
@@ -25,9 +29,17 @@ public class Grupo {
 
 	public void setNombre (String nombre) { this.nombre = nombre; }
 
+	public void setCuentas (List<Cuenta> cuents) {
+		this.cuentas = cuentas;
+	}
+
 	public Long getId () { return id; }
 
 	public String getCodigo () { return codigo; }
 
 	public String getNombre () { return nombre; }
+
+	public List<Cuenta> getCuentas () {
+		return cuentas;
+	}
 }
