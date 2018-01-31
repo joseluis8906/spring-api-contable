@@ -6,6 +6,7 @@ public class Grupo {
 	private Long id;
 	private String codigo;
 	private String nombre;
+	private Clase clase;
 
 	public Grupo() {}
 
@@ -39,10 +40,13 @@ public class Grupo {
 		return nombre;
 	}
 
+	public Clase getClase () { return clase; }
+
 	@Override
 	public String toString() {
 		return "{ \"id\": " + id + ", " +
 				"\"codigo\": \"" + codigo + "\", " +
-				"\"nombre\": \"" + nombre + "\"}";
+				"\"nombre\": \"" + nombre + "\", " +
+				"\"clase\": " + clase.toString() + "}";
 	}
 }

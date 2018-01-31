@@ -1,7 +1,6 @@
 package com.jose.samples.api.contable.puc.clase;
 
 import com.jose.samples.api.contable.puc.grupo.Grupo;
-import com.jose.samples.api.contable.puc.PucModel;
 
 import javax.persistence.*;
 import java.util.List;
@@ -14,8 +13,8 @@ public class Clase {
 	private String tipo;
 	private String codigo;
 	private String nombre;
-
-	@OneToMany(targetEntity = Grupo.class, fetch = FetchType.LAZY)
+	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+	@JoinColumn(name = "clase_id")
 	private List<Grupo> grupos;
 
 	public Clase () {}
@@ -36,9 +35,9 @@ public class Clase {
 
 	public void setNombre (String nombre) { this.nombre = nombre; }
 
-	public void setGrupos (List<Grupo> grupos) {
+	/*public void setGrupos (List<Grupo> grupos) {
 		this.grupos = grupos;
-	}
+	}*/
 
 	public Long getId () { return id; }
 

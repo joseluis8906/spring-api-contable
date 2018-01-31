@@ -1,25 +1,16 @@
 package com.jose.samples.api.contable.puc.grupo;
 
-import com.jose.samples.api.contable.puc.cuenta.Cuenta;
-import com.jose.samples.api.contable.puc.PucModel;
 import com.jose.samples.api.contable.puc.clase.Clase;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
-public class Grupo extends PucModel {
+public class Grupo {
 	@Id
 	@GeneratedValue (strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String codigo;
 	private String nombre;
-
-	@ManyToOne(targetEntity = Clase.class, cascade = CascadeType.ALL)
-	private Clase clase;
-
-	@OneToMany(targetEntity = Cuenta.class)
-	private List<Cuenta> cuentas;
 
 	public Grupo () {}
 
@@ -34,21 +25,9 @@ public class Grupo extends PucModel {
 
 	public void setNombre (String nombre) { this.nombre = nombre; }
 
-	public void setClase (Clase clase) {
-		this.clase = clase;
-	}
-
 	public Long getId () { return id; }
 
 	public String getCodigo () { return codigo; }
 
 	public String getNombre () { return nombre; }
-
-	public Clase getClase () {
-		return clase;
-	}
-
-	public List<Cuenta> getCuentas() {
-		return cuentas;
-	}
 }

@@ -25,10 +25,10 @@ public class GrupoServiceImpl implements GrupoService {
 		return this.grupoRepository.findByCodigoContainingOrNombreContaining (codigo, nombre);
 	}
 
-	@Override
-	public List<Grupo> findByClase(Long clase) {
+	//@Override
+	/*public List<Grupo> findByClase(Long clase) {
 		return this.grupoRepository.findByClase(clase);
-	}
+	}*/
 
 	@Override
 	public List<Grupo> findAll() {

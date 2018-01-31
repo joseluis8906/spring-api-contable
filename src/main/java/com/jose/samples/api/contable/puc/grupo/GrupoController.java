@@ -39,7 +39,7 @@ public class GrupoController {
 	public void update (@PathVariable Long id, @RequestBody Grupo grupo) {
 		Grupo existingGrupo = grupoServiceImpl.findById(id);
 		Assert.notNull(existingGrupo, "Grupo no encontrada");
-		existingGrupo.setClase(grupo.getClase());
+		//existingGrupo.setClase(grupo.getClase());
 		existingGrupo.setCodigo(grupo.getCodigo());
 		existingGrupo.setNombre(grupo.getNombre());
 		grupoServiceImpl.update(existingGrupo);
