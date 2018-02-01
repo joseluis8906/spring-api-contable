@@ -51,10 +51,11 @@ public class ClaseController {
 	}
 
 	@PostMapping("/{id}/grupos")
-	public void addGrupo (@PathVariable Long id, @RequestParam Grupo grupo) {
+	public Grupo addGrupo (@PathVariable Long id, @RequestBody Grupo grupo) {
 		Clase existingClase = claseServiceImpl.findById(id);
 		Assert.notNull(existingClase, "Clase no encontrada");
 		existingClase.getGrupos().add(grupo);
 		claseServiceImpl.update(existingClase);
+		return grupo;
 	}
 }

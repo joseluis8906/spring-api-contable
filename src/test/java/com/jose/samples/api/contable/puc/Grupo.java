@@ -1,5 +1,7 @@
 package com.jose.samples.api.contable.puc;
 
+import org.springframework.web.client.RestTemplate;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,6 +10,9 @@ public class Grupo {
 	private String codigo;
 	private String nombre;
 	private List<Cuenta> cuentas = new ArrayList<>();
+
+	private static final String URI_CLASE = "http://localhost:8080/v1/puc/grupos";
+	private RestTemplate restTemplate = new RestTemplate();
 
 	public Grupo() {}
 

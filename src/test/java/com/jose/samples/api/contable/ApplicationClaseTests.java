@@ -37,8 +37,8 @@ public class ApplicationClaseTests {
 		clase.update();*/
 
 		clase.addGrupo(new Grupo(null, "11", "Bancos"));
-		clase.getGrupos().forEach(grupo -> grupo.addCuenta(new Cuenta(null, "1110", "Caja")));
-		clase.save();
+		//clase.getGrupos().forEach(grupo -> grupo.addCuenta(new Cuenta(null, "1110", "Caja")));
+		//clase.save();
 
 		clases =  new Clase().listAll();
 		System.out.println("List all clases after update: ");

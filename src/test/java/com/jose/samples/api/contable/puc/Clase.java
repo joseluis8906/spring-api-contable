@@ -136,6 +136,8 @@ public class Clase {
 
 		HttpEntity<Grupo> entityGrupo = new HttpEntity<>(grupo, httpHeaders);
 
-		restTemplate.put(URI_CLASE + "/{id}", entityGrupo, getId());
+		ResponseEntity<Grupo> resposeGrupo = restTemplate.postForEntity(URI_CLASE + "/{id}/grupos", entityGrupo, Grupo.class, getId());
+
+		getGrupos().add(resposeGrupo.getBody());
 	}
 }
