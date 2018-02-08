@@ -11,6 +11,7 @@ public class Clase {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String tipo;
+	@Column(unique = true)
 	private String codigo;
 	private String nombre;
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
@@ -50,4 +51,15 @@ public class Clase {
 	public List<Grupo> getGrupos () {
 		return grupos;
 	}
+
+	public Grupo getGrupo (Long id) {
+		for(Grupo grupo: grupos){
+			if(grupo.getId() == id){
+				return grupo;
+			}
+		}
+
+		return null;
+	}
+
 }

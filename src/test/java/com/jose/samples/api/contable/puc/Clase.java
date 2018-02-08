@@ -27,6 +27,7 @@ public class Clase {
 		this.tipo = tipo;
 		this.codigo = codigo;
 		this.nombre = nombre;
+		save();
 	}
 
 	public void setId (Long id) {
@@ -139,5 +140,10 @@ public class Clase {
 		ResponseEntity<Grupo> resposeGrupo = restTemplate.postForEntity(URI_CLASE + "/{id}/grupos", entityGrupo, Grupo.class, getId());
 
 		getGrupos().add(resposeGrupo.getBody());
+	}
+
+	public void listGrupos () {
+		Grupo[] grupos_ = restTemplate.getForObject(URI_CLASE + "/{id}/grupos", Grupo[].class, getId());
+		setGrupos(Arrays.asList(grupos_));
 	}
 }

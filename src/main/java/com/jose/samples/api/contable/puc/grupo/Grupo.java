@@ -10,6 +10,7 @@ public class Grupo {
 	@Id
 	@GeneratedValue (strategy = GenerationType.IDENTITY)
 	private Long id;
+	@Column(unique = true)
 	private String codigo;
 	private String nombre;
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)

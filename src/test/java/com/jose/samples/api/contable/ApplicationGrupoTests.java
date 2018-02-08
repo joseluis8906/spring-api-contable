@@ -1,19 +1,18 @@
 package com.jose.samples.api.contable;
 
 import com.jose.samples.api.contable.puc.Clase;
-import com.jose.samples.api.contable.puc.Cuenta;
 import com.jose.samples.api.contable.puc.Grupo;
 
 import java.util.List;
 
-public class ApplicationClaseTests {
+public class ApplicationGrupoTests {
 
 	public static void main (String args[]) {
-		ApplicationClaseTests app = new ApplicationClaseTests();
+		ApplicationGrupoTests app = new ApplicationGrupoTests();
 		app.listGrupos();
 	}
 
-	public void saveAClase () {
+	public void saveAGrupo () {
 		Clase clase = new Clase(null, "Comercial", "1", "Activo");
 		clase.save();
 		System.out.println("Created Clase: " + clase);

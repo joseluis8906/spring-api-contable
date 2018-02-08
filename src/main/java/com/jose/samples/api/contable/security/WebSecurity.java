@@ -44,17 +44,11 @@ public class WebSecurity extends WebSecurityConfigurerAdapter{
         http.cors().and().csrf().disable()
 				.authorizeRequests()
 				.antMatchers(HttpMethod.POST, SIGN_UP_URL).permitAll()
-				.antMatchers(HttpMethod.GET, "/v1/puc/clases*").permitAll()
-				.antMatchers(HttpMethod.GET, "/v1/puc/clases/*").permitAll()
-				.antMatchers(HttpMethod.POST, "/v1/puc/clases").permitAll()
-				.antMatchers(HttpMethod.POST, "/v1/puc/clases/*/grupos").permitAll()
-				.antMatchers(HttpMethod.PUT, "/v1/puc/clases/*").permitAll()
-				.antMatchers(HttpMethod.DELETE, "/v1/puc/clases/*").permitAll()
-                .anyRequest().authenticated()
+                .anyRequest().permitAll();/*authenticated()
                 .and()
                 .addFilter(new JWTAuthenticationFilter(authenticationManager()))
                 .addFilter(new JWTAuthorizationFilter(authenticationManager()))
-                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);*/
     }
     
     @Override

@@ -3,6 +3,7 @@ package com.jose.samples.api.contable.puc;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Grupo {
@@ -71,6 +72,11 @@ public class Grupo {
 
 	public void addCuenta (Cuenta cuenta) {
 		getCuentas().add(cuenta);
+	}
+
+	public List<Clase> listAll() {
+		Clase[] clases = restTemplate.getForObject(URI_CLASE, Clase[].class);
+		return Arrays.asList(clases);
 	}
 
 }
