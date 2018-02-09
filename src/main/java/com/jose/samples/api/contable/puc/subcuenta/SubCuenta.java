@@ -1,25 +1,25 @@
-package com.jose.samples.api.contable.puc.grupo;
+package com.jose.samples.api.contable.puc.subcuenta;
 
-import com.jose.samples.api.contable.puc.cuenta.Cuenta;
+import com.jose.samples.api.contable.puc.auxiliar.Auxiliar;
 
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
-public class Grupo {
+public class SubCuenta {
 	@Id
-	@GeneratedValue (strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	@Column(unique = true)
 	private String codigo;
 	private String nombre;
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-	@JoinColumn(name = "grupo_id")
-	private List<Cuenta> cuentas;
+	@JoinColumn(name = "subcuenta_id")
+	private List<Auxiliar> auxiliares;
 
-	public Grupo () {}
+	public SubCuenta() {}
 
-	public Grupo (String codigo, String nombre) {
+	public SubCuenta(String codigo, String nombre) {
 		this.codigo = codigo;
 		this.nombre = nombre;
 	}
@@ -30,27 +30,24 @@ public class Grupo {
 
 	public void setNombre (String nombre) { this.nombre = nombre; }
 
-	public void setCuentas (List<Cuenta> cuents) {
-		this.cuentas = cuentas;
-	}
-
 	public Long getId () { return id; }
 
 	public String getCodigo () { return codigo; }
 
 	public String getNombre () { return nombre; }
 
-	public List<Cuenta> getCuentas () {
-		return cuentas;
+	public List<Auxiliar> getAuxiliares() {
+		return auxiliares;
 	}
 
-	public Cuenta getCuenta (Long id) {
-		for(Cuenta cuenta: cuentas){
-			if(cuenta.getId() == id){
-				return cuenta;
+	public Auxiliar getAuxiliar (Long id) {
+		for(Auxiliar auxiliar: auxiliares){
+			if(auxiliar.getId() == id){
+				return auxiliar;
 			}
 		}
 
 		return null;
 	}
+
 }

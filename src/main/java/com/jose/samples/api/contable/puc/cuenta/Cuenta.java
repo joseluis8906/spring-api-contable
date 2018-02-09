@@ -1,6 +1,9 @@
 package com.jose.samples.api.contable.puc.cuenta;
 
+import com.jose.samples.api.contable.puc.subcuenta.SubCuenta;
+
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Cuenta {
@@ -10,6 +13,9 @@ public class Cuenta {
 	@Column(unique = true)
 	private String codigo;
 	private String nombre;
+	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+	@JoinColumn(name = "cuenta_id")
+	private List<SubCuenta> subcuentas;
 
 	public Cuenta() {}
 
@@ -29,4 +35,18 @@ public class Cuenta {
 	public String getCodigo () { return codigo; }
 
 	public String getNombre () { return nombre; }
+
+	public List<SubCuenta> getSubCuentas () {
+		return subcuentas;
+	}
+
+	public SubCuenta getSubCuenta (Long id) {
+		for(SubCuenta subcuenta: subcuentas){
+			if(subcuenta.getId() == id){
+				return subcuenta;
+			}
+		}
+
+		return null;
+	}
 }
