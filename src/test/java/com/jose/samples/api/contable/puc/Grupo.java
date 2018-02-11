@@ -12,9 +12,6 @@ public class Grupo {
 	private String nombre;
 	private List<Cuenta> cuentas = new ArrayList<>();
 
-	private static final String URI_CLASE = "http://localhost:8080/v1/puc/grupos";
-	private RestTemplate restTemplate = new RestTemplate();
-
 	public Grupo() {}
 
 	public Grupo(Long id, String codigo, String nombre) {
@@ -23,33 +20,32 @@ public class Grupo {
 		this.nombre = nombre;
 	}
 
-	public void setId (Long id) {
-		this.id = id;
-	}
-
-	public void setCodigo (String codigo) {
-		this.codigo = codigo;
-	}
-
-	public void setNombre (String nombre) {
-		this.nombre = nombre;
-	}
-
-	public void setCuentas (List<Cuenta> cuentas) { this.cuentas = cuentas; }
-
 	public Long getId () {
 		return id;
+	}
+	public void setId (Long id) {
+		this.id = id;
 	}
 
 	public String getCodigo () {
 		return codigo;
 	}
+	public void setCodigo (String codigo) {
+		this.codigo = codigo;
+	}
 
 	public String getNombre () {
 		return nombre;
 	}
+	public void setNombre (String nombre) {
+		this.nombre = nombre;
+	}
 
 	public List<Cuenta> getCuentas () { return cuentas; }
+	public void setCuentas (List<Cuenta> cuentas) { this.cuentas = cuentas; }
+	public void addCuenta (Cuenta cuenta) {
+		getCuentas().add(cuenta);
+	}
 
 	@Override
 	public String toString() {
@@ -68,15 +64,6 @@ public class Grupo {
 		}
 
 		return cuentasString;
-	}
-
-	public void addCuenta (Cuenta cuenta) {
-		getCuentas().add(cuenta);
-	}
-
-	public List<Clase> listAll() {
-		Clase[] clases = restTemplate.getForObject(URI_CLASE, Clase[].class);
-		return Arrays.asList(clases);
 	}
 
 }

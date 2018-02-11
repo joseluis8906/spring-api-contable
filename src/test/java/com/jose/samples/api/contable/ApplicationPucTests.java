@@ -5,14 +5,14 @@ import com.jose.samples.api.contable.puc.Grupo;
 
 import java.util.List;
 
-public class ApplicationGrupoTests {
+public class ApplicationPucTests {
 
 	public static void main (String args[]) {
-		ApplicationGrupoTests app = new ApplicationGrupoTests();
+		ApplicationPucTests app = new ApplicationPucTests();
 		app.listGrupos();
 	}
 
-	public void saveAGrupo () {
+	public void saveAClase () {
 		Clase clase = new Clase(null, "Comercial", "1", "Activo");
 		clase.save();
 		System.out.println("Created Clase: " + clase);
