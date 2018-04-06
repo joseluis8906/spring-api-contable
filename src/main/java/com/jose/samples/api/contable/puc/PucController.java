@@ -269,15 +269,45 @@ public class PucController {
 	public List<SubCuenta> listSubCuentas (
 			@PathVariable Long ClaseId,
 			@PathVariable Long GrupoId,
-			@PathVariable Long CuentaId
-	) {
+			@PathVariable Long CuentaId ){
+
 		Clase existingClase = claseServiceImpl.findById(ClaseId);
-		Assert.notNull(existingClase, "Clase no encontrada");
-		Grupo existingGrupo = existingClase.getGrupo(GrupoId);
-		Assert.notNull(existingGrupo, "Grupo no encontrado");
-		Cuenta existingCuenta = existingGrupo.getCuenta(CuentaId);
-		Assert.notNull(existingCuenta, "Cuenta no encontrada");
-		return existingCuenta.getSubCuentas();
+
+		if(null == existingClase){
+			return null;
+		}
+
+		List<Grupo> grupos = existingClase.getGrupos();
+		Grupo grupo = null;
+
+		for(Grupo _grupo: grupos){
+			if(_grupo.getId() == GrupoId){
+				grupo = _grupo;
+				break;
+			}
+		}
+
+		if(null == grupo){
+			return null;
+		}
+
+		List<Cuenta> cuentas = grupo.getCuentas();
+		Cuenta cuenta = null;
+
+		for(Cuenta _cuenta: cuentas){
+			if(_cuenta.getId() == CuentaId){
+				cuenta = _cuenta;
+				break;
+			}
+		}
+
+		if(null == cuenta){
+			return null;
+		}
+
+
+		return cuenta.getSubCuentas();
+
 	}
 
 	@GetMapping("/clases/{ClaseId}/grupos/{GrupoId}/cuentas/{CuentaId}/subcuentas/{SubCuentaId}")
@@ -285,15 +315,51 @@ public class PucController {
 			@PathVariable Long ClaseId,
 			@PathVariable Long GrupoId,
 			@PathVariable Long CuentaId,
-			@PathVariable Long SubCuentaId
-	) {
+			@PathVariable Long SubCuentaId	){
+
 		Clase existingClase = claseServiceImpl.findById(ClaseId);
-		Assert.notNull(existingClase, "Clase no encontrada");
-		Grupo existingGrupo = existingClase.getGrupo(GrupoId);
-		Assert.notNull(existingGrupo, "Grupo no encontrado");
-		Cuenta existingCuenta = existingGrupo.getCuenta(CuentaId);
-		Assert.notNull(existingCuenta, "Cuenta no encontrada");
-		return existingCuenta.getSubCuenta(SubCuentaId);
+
+		if(null == existingClase){
+			return null;
+		}
+
+		List<Grupo> grupos = existingClase.getGrupos();
+		Grupo grupo = null;
+
+		for(Grupo _grupo: grupos){
+			if(_grupo.getId() == GrupoId){
+				grupo = _grupo;
+				break;
+			}
+		}
+
+		if(null == grupo){
+			return null;
+		}
+
+		List<Cuenta> cuentas = grupo.getCuentas();
+		Cuenta cuenta = null;
+
+		for(Cuenta _cuenta: cuentas){
+			if(_cuenta.getId() == CuentaId){
+				cuenta = _cuenta;
+				break;
+			}
+		}
+
+		if(null == cuenta){
+			return null;
+		}
+
+		List<SubCuenta> subcuentas = cuenta.getSubCuentas();
+
+		for(SubCuenta subcuenta: subcuentas){
+			if(subcuenta.getId() == SubCuentaId){
+				return subcuenta;
+			}
+		}
+
+		return null;
 	}
 
 	@PostMapping("/clases/{ClaseId}/grupos/{GrupoId}/cuentas/{CuentaId}/subcuentas/{SubCuentaId}/auxiliares")
@@ -302,18 +368,59 @@ public class PucController {
 			@PathVariable Long GrupoId,
 			@PathVariable Long CuentaId,
 			@PathVariable Long SubCuentaId,
-			@RequestBody Auxiliar auxiliar
-	) {
+			@RequestBody Auxiliar auxiliar	){
+
 		Clase existingClase = claseServiceImpl.findById(ClaseId);
-		Assert.notNull(existingClase, "Clase no encontrada");
-		Grupo existingGrupo = existingClase.getGrupo(GrupoId);
-		Assert.notNull(existingGrupo, "Grupo no encontrado");
-		Cuenta existingCuenta = existingGrupo.getCuenta(CuentaId);
-		Assert.notNull(existingCuenta, "Cuenta no encontrada");
-		SubCuenta existingSubCuenta = existingCuenta.getSubCuenta(SubCuentaId);
-		Assert.notNull(existingSubCuenta, "SubCuenta no encontrada");
-		existingSubCuenta.getAuxiliares().add(auxiliar);
-		subCuentaServiceImpl.update(existingSubCuenta);
+
+		if(null == existingClase){
+			return null;
+		}
+
+		List<Grupo> grupos = existingClase.getGrupos();
+		Grupo grupo = null;
+
+		for(Grupo _grupo: grupos){
+			if(_grupo.getId() == GrupoId){
+				grupo = _grupo;
+				break;
+			}
+		}
+
+		if(null == grupo){
+			return null;
+		}
+
+		List<Cuenta> cuentas = grupo.getCuentas();
+		Cuenta cuenta = null;
+
+		for(Cuenta _cuenta: cuentas){
+			if(_cuenta.getId() == CuentaId){
+				cuenta = _cuenta;
+				break;
+			}
+		}
+
+		if(null == cuenta){
+			return null;
+		}
+
+		List<SubCuenta> subcuentas = cuenta.getSubCuentas();
+		SubCuenta subcuenta = null;
+
+		for(SubCuenta _subcuenta: subcuentas){
+			if(_subcuenta.getId() == SubCuentaId){
+				subcuenta = _subcuenta;
+				break;
+			}
+		}
+
+		if(null == subcuenta){
+			return null;
+		}
+
+		subcuenta.getAuxiliares().add(auxiliar);
+		subCuentaServiceImpl.update(subcuenta);
+
 		return auxiliar;
 	}
 
@@ -325,14 +432,54 @@ public class PucController {
 			@PathVariable Long SubCuentaId
 	) {
 		Clase existingClase = claseServiceImpl.findById(ClaseId);
-		Assert.notNull(existingClase, "Clase no encontrada");
-		Grupo existingGrupo = existingClase.getGrupo(GrupoId);
-		Assert.notNull(existingGrupo, "Grupo no encontrado");
-		Cuenta existingCuenta = existingGrupo.getCuenta(CuentaId);
-		Assert.notNull(existingCuenta, "Cuenta no encontrada");
-		SubCuenta existingSubCuenta = existingCuenta.getSubCuenta(SubCuentaId);
-		Assert.notNull(existingSubCuenta, "SubCuenta no encontrada");
-		return existingSubCuenta.getAuxiliares();
+
+		if(null == existingClase){
+			return null;
+		}
+
+		List<Grupo> grupos = existingClase.getGrupos();
+		Grupo grupo = null;
+
+		for(Grupo _grupo: grupos){
+			if(_grupo.getId() == GrupoId){
+				grupo = _grupo;
+				break;
+			}
+		}
+
+		if(null == grupo){
+			return null;
+		}
+
+		List<Cuenta> cuentas = grupo.getCuentas();
+		Cuenta cuenta = null;
+
+		for(Cuenta _cuenta: cuentas){
+			if(_cuenta.getId() == CuentaId){
+				cuenta = _cuenta;
+				break;
+			}
+		}
+
+		if(null == cuenta){
+			return null;
+		}
+
+		List<SubCuenta> subcuentas = cuenta.getSubCuentas();
+		SubCuenta subcuenta = null;
+
+		for(SubCuenta _subcuenta: subcuentas){
+			if(_subcuenta.getId() == SubCuentaId){
+				subcuenta = _subcuenta;
+				break;
+			}
+		}
+
+		if(null == subcuenta){
+			return null;
+		}
+
+		return subcuenta.getAuxiliares();
 	}
 
 	@GetMapping("/clases/{ClaseId}/grupos/{GrupoId}/cuentas/{CuentaId}/subcuentas/{SubCuentaId}/auxiliares/{AuxiliarId}")
@@ -344,14 +491,61 @@ public class PucController {
 			@PathVariable Long AuxiliarId
 	) {
 		Clase existingClase = claseServiceImpl.findById(ClaseId);
-		Assert.notNull(existingClase, "Clase no encontrada");
-		Grupo existingGrupo = existingClase.getGrupo(GrupoId);
-		Assert.notNull(existingGrupo, "Grupo no encontrado");
-		Cuenta existingCuenta = existingGrupo.getCuenta(CuentaId);
-		Assert.notNull(existingGrupo, "Cuenta no encontrada");
-		SubCuenta existingSubCuenta = existingCuenta.getSubCuenta(SubCuentaId);
-		Assert.notNull(existingSubCuenta, "SubCuenta no encontrada");
-		return existingSubCuenta.getAuxiliar(AuxiliarId);
-	}
 
+		if(null == existingClase){
+			return null;
+		}
+
+		List<Grupo> grupos = existingClase.getGrupos();
+		Grupo grupo = null;
+
+		for(Grupo _grupo: grupos){
+			if(_grupo.getId() == GrupoId){
+				grupo = _grupo;
+				break;
+			}
+		}
+
+		if(null == grupo){
+			return null;
+		}
+
+		List<Cuenta> cuentas = grupo.getCuentas();
+		Cuenta cuenta = null;
+
+		for(Cuenta _cuenta: cuentas){
+			if(_cuenta.getId() == CuentaId){
+				cuenta = _cuenta;
+				break;
+			}
+		}
+
+		if(null == cuenta){
+			return null;
+		}
+
+		List<SubCuenta> subcuentas = cuenta.getSubCuentas();
+		SubCuenta subcuenta = null;
+
+		for(SubCuenta _subcuenta: subcuentas){
+			if(_subcuenta.getId() == SubCuentaId){
+				subcuenta = _subcuenta;
+				break;
+			}
+		}
+
+		if(null == subcuenta){
+			return null;
+		}
+
+		List<Auxiliar> auxiliares = subcuenta.getAuxiliares();
+
+		for(Auxiliar auxiliar: auxiliares){
+			if(auxiliar.getId() == AuxiliarId){
+				return auxiliar;
+			}
+		}
+
+		return null;
+	}
 }
