@@ -6,15 +6,20 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
+@Table(uniqueConstraints = {
+		@UniqueConstraint(columnNames = {
+				"tipo",
+				"nombre"
+		})
+})
 public class Clase {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String tipo;
-	@Column(unique = true)
 	private String codigo;
 	private String nombre;
-	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
 	@JoinColumn(name = "clase_id")
 	private List<Grupo> grupos;
 
@@ -51,15 +56,4 @@ public class Clase {
 	public List<Grupo> getGrupos () {
 		return grupos;
 	}
-
-	public Grupo getGrupo (Long id) {
-		for(Grupo grupo: grupos){
-			if(grupo.getId() == id){
-				return grupo;
-			}
-		}
-
-		return null;
-	}
-
 }

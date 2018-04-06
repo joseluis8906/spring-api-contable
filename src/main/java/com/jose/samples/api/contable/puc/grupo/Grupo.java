@@ -13,7 +13,7 @@ public class Grupo {
 	@Column(unique = true)
 	private String codigo;
 	private String nombre;
-	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
 	@JoinColumn(name = "grupo_id")
 	private List<Cuenta> cuentas;
 
@@ -42,15 +42,5 @@ public class Grupo {
 
 	public List<Cuenta> getCuentas () {
 		return cuentas;
-	}
-
-	public Cuenta getCuenta (Long id) {
-		for(Cuenta cuenta: cuentas){
-			if(cuenta.getId() == id){
-				return cuenta;
-			}
-		}
-
-		return null;
 	}
 }

@@ -9,6 +9,8 @@ package com.jose.samples.api.contable.user;
  *
  * @author jose
  */
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -22,7 +24,8 @@ public class ApplicationUser {
     private Long id;
     
     private String username;
-    
+
+    @JsonIgnore
     private String password;    
     
     public Long getId () {

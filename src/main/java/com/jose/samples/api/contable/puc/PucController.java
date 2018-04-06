@@ -10,6 +10,8 @@ import com.jose.samples.api.contable.puc.grupo.GrupoServiceImpl;
 import com.jose.samples.api.contable.puc.subcuenta.SubCuenta;
 import com.jose.samples.api.contable.puc.subcuenta.SubCuentaServiceImpl;
 import io.jsonwebtoken.lang.Assert;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.transaction.Transactional;
@@ -43,27 +45,32 @@ public class PucController {
 	}
 
 	@GetMapping("/clases")
-	public List<Clase> find (@RequestParam(value = "codigo", defaultValue = "") String codigo, @RequestParam(value = "nombre", defaultValue = "") String nombre) {
+	public List<Clase> find (
+			@RequestParam(value = "codigo", defaultValue = "") String codigo,
+			@RequestParam(value = "nombre", defaultValue = "") String nombre ){
+
 		if(!codigo.isEmpty() || !nombre.isEmpty()) {
 			return claseServiceImpl.findByCodigoOrNombre(codigo, nombre);
-		}else {
-			return claseServiceImpl.findAll();
 		}
+
+		return claseServiceImpl.findAll();
 	}
 
 	@PostMapping("/clases")
 	public Clase add (@RequestBody Clase clase) {
-		return claseServiceImpl.add (clase);
+		claseServiceImpl.add (clase);
+		return clase;
 	}
 
 	@PutMapping("/clases/{id}")
 	public void update (@PathVariable Long id, @RequestBody Clase clase) {
 		Clase existingClase = claseServiceImpl.findById(id);
-		Assert.notNull(existingClase, "Clase no encontrada");
-		existingClase.setTipo(clase.getTipo());
-		existingClase.setCodigo(clase.getCodigo());
-		existingClase.setNombre(clase.getNombre());
-		claseServiceImpl.update(existingClase);
+		if(null != existingClase){
+			existingClase.setTipo(clase.getTipo());
+			existingClase.setCodigo(clase.getCodigo());
+			existingClase.setNombre(clase.getNombre());
+			claseServiceImpl.update(existingClase);
+		}
 	}
 
 	@DeleteMapping("/clases/{id}")
@@ -74,7 +81,9 @@ public class PucController {
 	@PostMapping("/clases/{id}/grupos")
 	public Grupo addGrupo (@PathVariable Long id, @RequestBody Grupo grupo) {
 		Clase existingClase = claseServiceImpl.findById(id);
-		Assert.notNull(existingClase, "Clase no encontrada");
+		if(null == existingClase) {
+			return null;
+		}
 		existingClase.getGrupos().add(grupo);
 		claseServiceImpl.update(existingClase);
 		return grupo;
@@ -83,46 +92,93 @@ public class PucController {
 	@GetMapping("/clases/{id}/grupos")
 	public List<Grupo> listGrupos (@PathVariable Long id) {
 		Clase existingClase = claseServiceImpl.findById(id);
-		Assert.notNull(existingClase, "Clase no encontrada");
+		if (null == existingClase) {
+			return null;
+		}
 		return existingClase.getGrupos();
 	}
 
 	@GetMapping("/clases/{ClaseId}/grupos/{GrupoId}")
 	public Grupo getGrupo (
 			@PathVariable Long ClaseId,
-			@PathVariable Long GrupoId
-	){
+			@PathVariable Long GrupoId ){
+
 		Clase existingClase = claseServiceImpl.findById(ClaseId);
-		Assert.notNull(existingClase, "Clase no encontrada");
-		Grupo grupo = existingClase.getGrupo(GrupoId);
-		return grupo;
+
+		if(null == existingClase) {
+			return null;
+		}
+
+		List<Grupo> grupos = existingClase.getGrupos();
+
+		for (Grupo grupo: grupos){
+			if(grupo.getId() == GrupoId){
+				return grupo;
+			}
+		}
+
+		return null;
 	}
 
 	@PostMapping("/clases/{ClaseId}/grupos/{GrupoId}/cuentas")
 	public Cuenta addCuenta (
 			@PathVariable Long ClaseId,
 			@PathVariable Long GrupoId,
-			@RequestBody Cuenta cuenta
-	) {
+			@RequestBody Cuenta cuenta ){
+
 		Clase existingClase = claseServiceImpl.findById(ClaseId);
-		Assert.notNull(existingClase, "Clase no encontrada");
-		Grupo existingGrupo = existingClase.getGrupo(GrupoId);
-		Assert.notNull(existingGrupo, "Grupo no encontrado");
-		existingGrupo.getCuentas().add(cuenta);
-		grupoServiceImpl.update(existingGrupo);
+
+		if(null == existingClase){
+			return null;
+		}
+
+		List<Grupo> grupos = existingClase.getGrupos();
+
+		Grupo grupo = null;
+
+		for(Grupo _grupo: grupos){
+			if(_grupo.getId() == GrupoId){
+				grupo = _grupo;
+				break;
+			}
+		}
+
+		if(null == grupo){
+			return null;
+		}
+
+		grupo.getCuentas().add(cuenta);
+		grupoServiceImpl.update(grupo);
+
 		return cuenta;
 	}
 
 	@GetMapping("/clases/{ClaseId}/grupos/{GrupoId}/cuentas")
 	public List<Cuenta> listCuentas (
 			@PathVariable Long ClaseId,
-			@PathVariable Long GrupoId
-	) {
+			@PathVariable Long GrupoId ){
+
 		Clase existingClase = claseServiceImpl.findById(ClaseId);
-		Assert.notNull(existingClase, "Clase no encontrada");
-		Grupo existingGrupo = existingClase.getGrupo(GrupoId);
-		Assert.notNull(existingGrupo, "Grupo no encontrado");
-		return existingGrupo.getCuentas();
+
+		if(null == existingClase){
+			return null;
+		}
+
+		List<Grupo> grupos = existingClase.getGrupos();
+		Grupo grupo = null;
+
+		for(Grupo _grupo: grupos){
+			if(_grupo.getId() == GrupoId){
+				grupo = _grupo;
+				break;
+			}
+		}
+
+		if(null == grupo){
+			return null;
+		}
+
+		return grupo.getCuentas();
 	}
 
 	@GetMapping("/clases/{ClaseId}/grupos/{GrupoId}/cuentas/{CuentaId}")
@@ -132,10 +188,34 @@ public class PucController {
 			@PathVariable Long CuentaId
 	) {
 		Clase existingClase = claseServiceImpl.findById(ClaseId);
-		Assert.notNull(existingClase, "Clase no encontrada");
-		Grupo existingGrupo = existingClase.getGrupo(GrupoId);
-		Assert.notNull(existingGrupo, "Grupo no encontrado");
-		return existingGrupo.getCuenta(CuentaId);
+
+		if(null == existingClase){
+			return null;
+		}
+
+		List<Grupo> grupos = existingClase.getGrupos();
+		Grupo grupo = null;
+
+		for(Grupo _grupo: grupos){
+			if(_grupo.getId() == GrupoId){
+				grupo = _grupo;
+				break;
+			}
+		}
+
+		if(null == grupo){
+			return null;
+		}
+
+		List<Cuenta> cuentas = grupo.getCuentas();
+
+		for(Cuenta cuenta: cuentas){
+			if(cuenta.getId() == CuentaId){
+				return cuenta;
+			}
+		}
+
+		return null;
 	}
 
 	@PostMapping("/clases/{ClaseId}/grupos/{GrupoId}/cuentas/{CuentaId}/subcuentas")
@@ -143,16 +223,45 @@ public class PucController {
 			@PathVariable Long ClaseId,
 			@PathVariable Long GrupoId,
 			@PathVariable Long CuentaId,
-			@RequestBody SubCuenta subcuenta
-	) {
+			@RequestBody SubCuenta subcuenta ){
+
 		Clase existingClase = claseServiceImpl.findById(ClaseId);
-		Assert.notNull(existingClase, "Clase no encontrada");
-		Grupo existingGrupo = existingClase.getGrupo(GrupoId);
-		Assert.notNull(existingGrupo, "Grupo no encontrado");
-		Cuenta existingCuenta = existingGrupo.getCuenta(CuentaId);
-		Assert.notNull(existingCuenta, "Cuenta no encontrada");
-		existingCuenta.getSubCuentas().add(subcuenta);
-		cuentaServiceImpl.update(existingCuenta);
+
+		if(null == existingClase){
+			return null;
+		}
+
+		List<Grupo> grupos = existingClase.getGrupos();
+		Grupo grupo = null;
+
+		for(Grupo _grupo: grupos){
+			if(_grupo.getId() == GrupoId){
+				grupo = _grupo;
+				break;
+			}
+		}
+
+		if(null == grupo){
+			return null;
+		}
+
+		List<Cuenta> cuentas = grupo.getCuentas();
+		Cuenta cuenta = null;
+
+		for(Cuenta _cuenta: cuentas){
+			if(_cuenta.getId() == CuentaId){
+				cuenta = _cuenta;
+				break;
+			}
+		}
+
+		if(null == cuenta){
+			return null;
+		}
+
+		cuenta.getSubCuentas().add(subcuenta);
+		cuentaServiceImpl.update(cuenta);
+
 		return subcuenta;
 	}
 

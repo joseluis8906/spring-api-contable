@@ -13,7 +13,7 @@ public class Cuenta {
 	@Column(unique = true)
 	private String codigo;
 	private String nombre;
-	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
 	@JoinColumn(name = "cuenta_id")
 	private List<SubCuenta> subcuentas;
 
@@ -38,15 +38,5 @@ public class Cuenta {
 
 	public List<SubCuenta> getSubCuentas () {
 		return subcuentas;
-	}
-
-	public SubCuenta getSubCuenta (Long id) {
-		for(SubCuenta subcuenta: subcuentas){
-			if(subcuenta.getId() == id){
-				return subcuenta;
-			}
-		}
-
-		return null;
 	}
 }
