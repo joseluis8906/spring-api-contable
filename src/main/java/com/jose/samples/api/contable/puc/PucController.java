@@ -18,7 +18,7 @@ import javax.transaction.Transactional;
 import java.util.List;
 
 @RestController
-@RequestMapping("/v1/puc")
+@RequestMapping("/api/v1/puc")
 @Transactional
 public class PucController {
 
@@ -84,9 +84,18 @@ public class PucController {
 		if(null == existingClase) {
 			return null;
 		}
+
 		existingClase.getGrupos().add(grupo);
 		claseServiceImpl.update(existingClase);
-		return grupo;
+		List<Grupo> grupos = existingClase.getGrupos();
+
+		for(Grupo _grupo: grupos){
+			if(_grupo.getCodigo().equals(grupo.getCodigo())){
+				return _grupo;
+			}
+		}
+
+		return null;
 	}
 
 	@GetMapping("/clases/{id}/grupos")
@@ -150,7 +159,14 @@ public class PucController {
 		grupo.getCuentas().add(cuenta);
 		grupoServiceImpl.update(grupo);
 
-		return cuenta;
+		List<Cuenta> cuentas = grupo.getCuentas();
+		for (Cuenta _cuenta: cuentas){
+			if(_cuenta.getCodigo().equals(cuenta.getCodigo())){
+				return _cuenta;
+			}
+		}
+
+		return null;
 	}
 
 	@GetMapping("/clases/{ClaseId}/grupos/{GrupoId}/cuentas")
@@ -262,7 +278,14 @@ public class PucController {
 		cuenta.getSubCuentas().add(subcuenta);
 		cuentaServiceImpl.update(cuenta);
 
-		return subcuenta;
+		List<SubCuenta> subcuentas = cuenta.getSubCuentas();
+		for (SubCuenta _subcuenta: subcuentas){
+			if(_subcuenta.getCodigo().equals(subcuenta.getCodigo())){
+				return _subcuenta;
+			}
+		}
+
+		return null;
 	}
 
 	@GetMapping("/clases/{ClaseId}/grupos/{GrupoId}/cuentas/{CuentaId}/subcuentas")
@@ -421,7 +444,14 @@ public class PucController {
 		subcuenta.getAuxiliares().add(auxiliar);
 		subCuentaServiceImpl.update(subcuenta);
 
-		return auxiliar;
+		List<Auxiliar> auxiliares = subcuenta.getAuxiliares();
+		for (Auxiliar _auxiliar: auxiliares){
+			if(_auxiliar.getCodigo().equals(auxiliar.getCodigo())){
+				return _auxiliar;
+			}
+		}
+
+		return null;
 	}
 
 	@GetMapping("/clases/{ClaseId}/grupos/{GrupoId}/cuentas/{CuentaId}/subcuentas/{SubCuentaId}/auxiliares")

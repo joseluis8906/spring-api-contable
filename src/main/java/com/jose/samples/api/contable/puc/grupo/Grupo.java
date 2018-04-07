@@ -6,11 +6,16 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
+@Table(uniqueConstraints = {
+		@UniqueConstraint(columnNames = {
+				"clase_id",
+				"nombre"
+		})
+})
 public class Grupo {
 	@Id
 	@GeneratedValue (strategy = GenerationType.IDENTITY)
 	private Long id;
-	@Column(unique = true)
 	private String codigo;
 	private String nombre;
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
@@ -30,7 +35,7 @@ public class Grupo {
 
 	public void setNombre (String nombre) { this.nombre = nombre; }
 
-	public void setCuentas (List<Cuenta> cuents) {
+	public void setCuentas (List<Cuenta> cuentas) {
 		this.cuentas = cuentas;
 	}
 

@@ -3,11 +3,16 @@ package com.jose.samples.api.contable.puc.auxiliar;
 import javax.persistence.*;
 
 @Entity
+@Table(uniqueConstraints = {
+		@UniqueConstraint(columnNames = {
+				"subcuenta_id",
+				"nombre"
+		})
+})
 public class Auxiliar {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	@Column(unique = true)
 	private String codigo;
 	private String nombre;
 

@@ -6,11 +6,16 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
+@Table(uniqueConstraints = {
+		@UniqueConstraint(columnNames = {
+				"grupo_id",
+				"nombre"
+		})
+})
 public class Cuenta {
 	@Id
 	@GeneratedValue (strategy = GenerationType.IDENTITY)
 	private Long id;
-	@Column(unique = true)
 	private String codigo;
 	private String nombre;
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
