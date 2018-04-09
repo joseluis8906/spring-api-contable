@@ -39,6 +39,12 @@ public class PucController {
 		this.subCuentaServiceImpl = subCuentaServiceImpl;
 	}
 
+	@PostMapping("/clases")
+	public ResponseEntity add (@RequestBody Clase clase) {
+		claseServiceImpl.add (clase);
+		return ResponseEntity.status(HttpStatus.CREATED).body(clase);
+	}
+
 	@GetMapping("/clases/{id}")
 	public Clase findById (@PathVariable Long id) {
 		return claseServiceImpl.findById(id);
@@ -54,12 +60,6 @@ public class PucController {
 		}
 
 		return claseServiceImpl.findAll();
-	}
-
-	@PostMapping("/clases")
-	public Clase add (@RequestBody Clase clase) {
-		claseServiceImpl.add (clase);
-		return clase;
 	}
 
 	@PutMapping("/clases/{id}")

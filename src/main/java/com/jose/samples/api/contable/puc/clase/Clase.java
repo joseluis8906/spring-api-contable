@@ -25,10 +25,10 @@ public class Clase {
 
 	public Clase () {}
 
-	public Clase (String tipo, String codigo, String nombre) {
-		this.tipo = tipo;
-		this.codigo = codigo;
-		this.nombre = nombre;
+	public Clase (ClaseServiceImpl.ClaseBuilder builder) {
+		this.tipo = builder.getTipo();
+		this.codigo = builder.getCodigo();
+		this.nombre = builder.getNombre();
 	}
 
 	public void setId (Long id) { this.id = id; }

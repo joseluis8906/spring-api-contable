@@ -42,5 +42,43 @@ public class ClaseServiceImpl implements ClaseService {
 	}
 
 
+	//builder class
+	public static class ClaseBuilder {
 
+		private String tipo;
+		private String codigo;
+		private String nombre;
+
+		public ClaseBuilder() {}
+
+		public ClaseBuilder setTipo(String tipo){
+			this.tipo = tipo;
+			return this;
+		}
+
+		public ClaseBuilder setCodigo(String codigo){
+			this.codigo = codigo;
+			return this;}
+
+		public ClaseBuilder setNombre(String nombre){
+			this.nombre = nombre;
+			return this;
+		}
+
+		public String getTipo() {
+			return tipo;
+		}
+
+		public String getCodigo() {
+			return codigo;
+		}
+
+		public String getNombre() {
+			return nombre;
+		}
+
+		public Clase build() {
+			return new Clase(this);
+		}
+	}
 }
