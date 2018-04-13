@@ -48,4 +48,12 @@ public class PucCrontrollerTest {
 				.andExpect(MockMvcResultMatchers.jsonPath("$.codigo", CoreMatchers.is(clase.getCodigo())))
 				.andExpect(MockMvcResultMatchers.jsonPath("$.nombre", CoreMatchers.is(clase.getNombre())));
 	}
+
+	@Test
+	public void selectClaseTest () throws Exception {
+		mvc.perform(MockMvcRequestBuilders.get(URL+"/clases")
+				.contentType(MediaType.APPLICATION_JSON))
+				.andExpect(MockMvcResultMatchers.status().isOk())
+				.andExpect(MockMvcResultMatchers.jsonPath("$[0]"));
+	}
 }
