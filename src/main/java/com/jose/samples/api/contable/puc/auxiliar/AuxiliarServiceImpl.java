@@ -14,35 +14,28 @@ public class AuxiliarServiceImpl implements AuxiliarService {
 		this.auxiliarRepository = auxiliarRepository;
 	}
 
-	@Override
 	public Auxiliar findById (Long id) {
-		return this.auxiliarRepository.findById(id);
+		return this.auxiliarRepository.findById(id).get();
 	}
 
-	@Override
 	public List<Auxiliar> findByCodigoOrNombre (String codigo, String nombre) {
 		return this.auxiliarRepository.findByCodigoContainingOrNombreContaining (codigo, nombre);
 	}
 
-	@Override
 	public List<Auxiliar> findAll() {
 		return this.auxiliarRepository.findAll();
 	}
 
-	@Override
 	public Auxiliar add (Auxiliar auxiliar) {
 		this.auxiliarRepository.save(auxiliar);
 		return auxiliar;
 	}
 
-	@Override
 	public void update (Auxiliar auxiliar) {
 		this.auxiliarRepository.save(auxiliar);
 	}
 
-	@Override
 	public void delete (Long id) {
-		this.auxiliarRepository.delete(id);
+		this.auxiliarRepository.deleteById(id);
 	}
-
 }

@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -17,7 +18,7 @@ public class SubCuentaServiceImpl implements SubCuentaService {
 
 	@Override
 	public SubCuenta findById (Long id) {
-		return this.subCuentaRepository.findById(id);
+		return this.subCuentaRepository.findById(id).get();
 	}
 
 	@Override
@@ -43,6 +44,6 @@ public class SubCuentaServiceImpl implements SubCuentaService {
 
 	@Override
 	public void delete (Long id) {
-		this.subCuentaRepository.delete(id);
+		this.subCuentaRepository.deleteById(id);
 	}
 }

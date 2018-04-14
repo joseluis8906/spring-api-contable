@@ -1,9 +1,9 @@
 package com.jose.samples.api.contable.puc.grupo;
 
 import org.springframework.stereotype.Service;
-
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -16,7 +16,7 @@ public class GrupoServiceImpl implements GrupoService {
 	}
 
 	@Override
-	public Grupo findById (Long id) {
+	public Optional<Grupo> findById (Long id) {
 		return this.grupoRepository.findById(id);
 	}
 
@@ -43,6 +43,6 @@ public class GrupoServiceImpl implements GrupoService {
 
 	@Override
 	public void delete (Long id) {
-		this.grupoRepository.delete(id);
+		this.grupoRepository.deleteById(id);
 	}
 }
