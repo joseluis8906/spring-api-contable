@@ -12,7 +12,6 @@ buildscript {
 }
 
 group = 'joseluis8906'
-version = '0.1.0-SNAPSHOT'
 
 apply plugin: 'java'
 apply plugin: 'idea'
@@ -22,6 +21,11 @@ apply plugin: 'io.spring.dependency-management'
 apply plugin: 'com.palantir.docker'
 
 bootJar {
+    baseName = 'api-contable'
+    version = '0.1.0'
+}
+
+jar {
     baseName = 'api-contable'
     version = '0.1.0'
 }
