@@ -3,10 +3,10 @@ package com.jose.samples.api.contable.puc.subcuenta;
 import java.util.List;
 
 public interface SubCuentaService {
-	public SubCuenta findById(Long id);
-	public List<SubCuenta> findByCodigoOrNombre(String codigo, String nombre);
-	public List<SubCuenta> findAll();
-	public SubCuenta add(SubCuenta subcuenta);
-	public void update(SubCuenta subcuenta);
-	public void delete(Long id);
+	SubCuenta findById(Long id);
+	List<SubCuenta> findByCodigoOrNombre(String codigo, String nombre);
+	List<SubCuenta> findAll();
+	SubCuenta add(SubCuenta subcuenta);
+	void update(SubCuenta subcuenta);
+	void delete(Long id);
 }

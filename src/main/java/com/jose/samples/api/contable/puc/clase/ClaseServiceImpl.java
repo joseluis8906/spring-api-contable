@@ -1,10 +1,10 @@
 package com.jose.samples.api.contable.puc.clase;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -17,7 +17,7 @@ public class ClaseServiceImpl implements ClaseService {
 	}
 
 	public Clase findById (Long id) {
-		return this.claseRepository.findById(id);
+		return this.claseRepository.findById(id).get();
 	}
 
 	public List<Clase> findByCodigoOrNombre (String codigo, String nombre) {
@@ -37,8 +37,8 @@ public class ClaseServiceImpl implements ClaseService {
 		this.claseRepository.save(clase);
 	}
 
-	public void delete (long id) {
-		this.claseRepository.delete(id);
+	public void delete (Long id) {
+		this.claseRepository.deleteById(id);
 	}
 
 

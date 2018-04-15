@@ -1,12 +1,13 @@
 package com.jose.samples.api.contable.puc.clase;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface ClaseService {
-	public Clase findById (Long id);
-	public List<Clase> findByCodigoOrNombre (String codigo, String nombre);
-	public List<Clase> findAll();
-	public Clase add (Clase clase);
-	public void update (Clase clase);
-	public void delete (long id);
+	Clase findById (Long id);
+	List<Clase> findByCodigoOrNombre (String codigo, String nombre);
+	List<Clase> findAll();
+	Clase add (Clase clase);
+	void update (Clase clase);
+	void delete (Long id);
 }

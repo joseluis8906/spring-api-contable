@@ -1,12 +1,13 @@
 package com.jose.samples.api.contable.puc.cuenta;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface CuentaService {
-	public Cuenta findById(Long id);
-	public List<Cuenta> findByCodigoOrNombre(String codigo, String nombre);
-	public List<Cuenta> findAll();
-	public Cuenta add(Cuenta grupo);
-	public void update(Cuenta grupo);
-	public void delete(Long id);
+	Optional<Cuenta> findById(Long id);
+	List<Cuenta> findByCodigoOrNombre(String codigo, String nombre);
+	List<Cuenta> findAll();
+	Cuenta add(Cuenta grupo);
+	void update(Cuenta grupo);
+	void delete(Long id);
 }
